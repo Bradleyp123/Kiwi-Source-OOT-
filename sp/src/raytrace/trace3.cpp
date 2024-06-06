@@ -3,6 +3,7 @@
 #include "raytrace.h"
 #include <bspfile.h>
 #include "bsplib.h"
+#include "data_initialization.cpp"
 
 static Vector VertCoord(dface_t const &f, int vnum)
 {
