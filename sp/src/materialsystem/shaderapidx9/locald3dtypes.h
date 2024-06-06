@@ -28,8 +28,6 @@ class CDx10Types
 {
 public:
 	typedef struct IDirect3D10BaseTexture	IDirect3DTexture;
-	// FIXME: What is this called now ? 
-	// typedef ID3D10TextureCube			IDirect3DCubeTexture;
 	typedef ID3D10Texture3D					IDirect3DVolumeTexture;
 	typedef ID3D10Device					IDirect3DDevice;
 	typedef D3D10_VIEWPORT					D3DVIEWPORT;
@@ -47,6 +45,40 @@ public:
 };
 
 #endif // defined( DX10 ) && !defined( DX_TO_GL_ABSTRACTION )
+
+#if defined( DX11 ) && !defined( DX_TO_GL_ABSTRACTION )
+
+#include <d3d11.h>
+#include <d3dx11.h>
+
+struct IDirect3D11BaseTexture
+{
+	ID3D11Resource			 *m_pBaseTexture;
+	ID3D11ShaderResourceView *m_pSRView;
+	ID3D11RenderTargetView	 *m_pRTView;
+};
+
+class CDx11Types
+{
+public:
+	typedef struct IDirect3D11BaseTexture	IDirect3DTexture;
+	typedef ID3D11Texture3D					IDirect3DVolumeTexture;
+	typedef ID3D11Device					IDirect3DDevice;
+	typedef D3D11_VIEWPORT					D3DVIEWPORT;
+	typedef ID3D11Buffer					IDirect3DIndexBuffer;
+	typedef ID3D11Buffer					IDirect3DVertexBuffer;
+	typedef ID3D11VertexShader				IDirect3DVertexShader;
+	typedef ID3D11PixelShader				IDirect3DPixelShader;
+	typedef ID3D11ShaderResourceView		IDirect3DSurface;
+	typedef ID3DX11Font						ID3DXFont;
+	typedef ID3D11Query						ID3DQuery;
+
+	typedef ID3D11Device					*LPDIRECT3DDEVICE;
+	typedef ID3D11Buffer					*LPDIRECT3DINDEXBUFFER;
+	typedef ID3D11Buffer					*LPDIRECT3DVERTEXBUFFER;
+};
+
+#endif // defined( DX11 ) && !defined( DX_TO_GL_ABSTRACTION )
 
 
 #if !defined( _X360 ) && !defined( DX_TO_GL_ABSTRACTION )
@@ -114,7 +146,7 @@ typedef void *HardwareShader_t;
 // The vertex and pixel shader type
 //-----------------------------------------------------------------------------
 typedef int VertexShader_t;
-typedef int PixelShader_t;	
+typedef int PixelShader_t;
 
 //-----------------------------------------------------------------------------
 // Bitpattern for an invalid shader
