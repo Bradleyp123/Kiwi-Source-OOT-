@@ -1372,7 +1372,7 @@ void BuildVisForLightEnvironment( void )
 
 	// Second pass to set flags on leaves that don't contain sky, but touch leaves that
 	// contain sky.
-	byte pvs[MAX_MAP_CLUSTERS / 8];
+	byte pvs[MAX_MAP_CLUSTERS / 8]; //Changed (8 > 16) under KiwiSrc on 10/06/2024
 
 	int nLeafBytes = (numleafs >> 3) + 1;
 	unsigned char *pLeafBits = (unsigned char *)stackalloc( nLeafBytes * sizeof(unsigned char) );
@@ -2900,7 +2900,7 @@ static void BuildSupersampleFaceLights( lightinfo_t& l, SSE_SampleInfo_t& info, 
 	// areas should be supersampled as a result of the previous pass. Keep going
 	// until all the gradients are reasonable or until we hit a max number of passes
 	bool do_anotherpass = true;
-	int pass = 1;
+	int pass = 8; //Changed (1 > 8) Under KiwiSrc on 10/06/2024
 	while (do_anotherpass && pass <= extrapasses)
 	{
 		// Look for lighting discontinuities to see what we should be supersampling

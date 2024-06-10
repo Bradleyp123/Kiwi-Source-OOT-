@@ -48,10 +48,10 @@ entity_t	*face_entity[MAX_MAP_FACES];
 Vector		face_offset[MAX_MAP_FACES];		// for rotating bmodels
 int			fakeplanes;
 
-unsigned	numbounce = 100; // 25; /* Originally this was 8 */
+unsigned	numbounce = 256; //How many bounces a ray can do? //Changed (100 > 256) Under KiwiSrc on 10/06/2024
 
-float		maxchop = 4; // coarsest allowed number of luxel widths for a patch
-float		minchop = 4; // "-chop" tightest number of luxel widths for a patch, used on edges
+float		maxchop = 1.5; // coarsest allowed number of luxel widths for a patch //Changed (4 > 1.5) Under KiwiSrc on 10/06/2024
+float		minchop = 1.5; // "-chop" tightest number of luxel widths for a patch, used on edges //Changed (4 > 1.5) Under KiwiSrc on 10/06/2024
 float		dispchop = 8.0f;	// number of luxel widths for a patch
 float		g_MaxDispPatchRadius = 1500.0f;			// Maximum radius allowed for displacement patches
 qboolean	g_bDumpPatches;
@@ -65,7 +65,7 @@ int			junk;
 
 Vector		ambient( 0, 0, 0 );
 
-float		lightscale = 1.0;
+float		lightscale = 0.5; //was 1.0, updated to 0. //Changed (1 > 0.5) Under KiwiSrc on 10/06/2024
 float		dlight_threshold = 0.1;  // was DIRECT_LIGHT constant
 
 char		source[MAX_PATH] = "";
@@ -100,14 +100,14 @@ qboolean	do_extra = true;
 bool		debug_extra = false;
 qboolean	do_fast = false;
 qboolean	do_centersamples = false;
-int			extrapasses = 4;
+int			extrapasses = 32; //changed (4 > 32) under KiwiSrc on 10/06/2024 //NOTE: Dose this do anything?
 float		smoothing_threshold = 0.7071067; // cos(45.0*(M_PI/180)) 
 // Cosine of smoothing angle(in radians)
-float		coring = 1.0;	// Light threshold to force to blackness(minimizes lightmaps)
+float		coring = 0.5;	// Light threshold to force to blackness(minimizes lightmaps) //Changed (1 > 0.5) under Kiwisrc on 10/06/2024
 qboolean	texscale = true;
 int			dlight_map = 0; // Setting to 1 forces direct lighting into different lightmap than radiosity
 
-float		luxeldensity = 1.0;
+float		luxeldensity = 0.5; //was 1.0, updated to 0.5 in Kiwisrc
 unsigned	num_degenerate_faces;
 
 qboolean	g_bLowPriority = false;
@@ -176,7 +176,7 @@ typedef struct
 	char	*filename;
 } texlight_t;
 
-#define	MAX_TEXLIGHTS	128
+#define	MAX_TEXLIGHTS	256
 
 texlight_t	texlights[MAX_TEXLIGHTS];
 int			num_texlights;
@@ -1754,7 +1754,7 @@ void RadWorld_Start()
 {
 	unsigned	i;
 
-	if (luxeldensity < 1.0)
+	if (luxeldensity < 0.5)
 	{
 		// Remember the old lightmap vectors.
 		float oldLightmapVecs[MAX_MAP_TEXINFO][2][4];
@@ -2477,7 +2477,7 @@ int ParseCommandLine( int argc, char **argv, bool *onlydetail )
 		}
 		else if (!Q_stricmp(argv[i],"-final"))
 		{
-			g_flSkySampleScale = 16.0;
+			g_flSkySampleScale = 32; //Changed (16 > 32) under KiwiSrc on 10/06/2024
 		}
 		else if (!Q_stricmp(argv[i],"-extrasky"))
 		{
@@ -2516,8 +2516,8 @@ int ParseCommandLine( int argc, char **argv, bool *onlydetail )
 			if ( ++i < argc )
 			{
 				luxeldensity = (float)atof (argv[i]);
-				if (luxeldensity > 1.0)
-					luxeldensity = 1.0 / luxeldensity;
+				if (luxeldensity > 0.5)
+					luxeldensity = 0.5 / luxeldensity;
 			}
 			else
 			{
@@ -2870,7 +2870,7 @@ int RunVRAD( int argc, char **argv )
 	Msg("Valve Software - vrad.exe (" __DATE__ ")\n" );
 #endif
 
-	Msg("\n      Valve Radiosity Simulator     \n");
+	Msg("\n      Valve Radiosity Simulator  2,1   \n");
 
 	verbose = true;  // Originally FALSE
 
