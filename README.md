@@ -7,4 +7,4 @@ Kiwi Source (KiwiSrc) is a custom built version of Valves Source®️ Engine, It
 KiwiSrc's goal is to create a "Semi-Modern" version of Source engine. This means improved VRAD, Improved Randering, More reliance on GPU and memory and a host of other improvements. This isn't ment to be the engine the next TitanFall runs on nor will it be, it is for the community by the community.
 
 NOTES:
-No MP, Issues with Vrad-Release and BSP-Debug
+No MP, Issues with and BSP-Debug
