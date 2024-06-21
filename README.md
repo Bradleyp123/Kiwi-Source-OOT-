@@ -14,4 +14,5 @@ Improved Real Time Reflections, Proper High-Resolution Texture support, Texture 
 improved AI.
 
 NOTES:
-No MP, luxels can be visible under circumstances where they are on an angle
+No MP, luxels can be visible under circumstances where they are on an angle,
+There are issues with compileing ported maps this is due to how KiwiSrc uses BSP21-V2 and has issues with Half Life 2 maps. it can load maps for hl2 but has Issues with compileing maps from hl2.
