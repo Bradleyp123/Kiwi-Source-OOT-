@@ -1,3 +1,6 @@
+# OUTDATED. GOTO https://github.com/Bradleyp123/KiwSrc-Ultimate
+
+
 # Kiwi-Source
 ![SOURCE](https://github.com/Bradleyp123/Kiwi-Source/assets/87635756/0ad57f7a-82fb-4077-8d73-40e69dbc1d09)
 Custom version of Source Engine, based on Mapbase and SDK 2013 CE.
